@@ -11,7 +11,7 @@
     :root {
       --bg: #0a0a0c;
       --surface: #16161a;
-      --primary: #00ff9d; /* Matrix/Cyber Green */
+      --primary: #00ff9d;
       --secondary: #94a3b8;
       --accent: #2dd4bf;
       --border: rgba(255, 255, 255, 0.1);
@@ -41,7 +41,6 @@
       pointer-events: none;
     }
 
-    /* --- NAVIGATION --- */
     nav {
       display: flex;
       justify-content: space-between;
@@ -56,170 +55,128 @@
     }
 
     .nav-logo { font-family: var(--font-mono); font-weight: 700; color: var(--primary); }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--secondary);
-      margin-left: 2rem;
-      font-size: 0.85rem;
-      font-family: var(--font-mono);
-      transition: 0.3s;
-    }
-
+    .nav-links a { text-decoration: none; color: var(--secondary); margin-left: 2rem; font-size: 0.85rem; font-family: var(--font-mono); transition: 0.3s; }
     .nav-links a:hover { color: var(--primary); }
+    .cv-download { border: 1px solid var(--primary); color: var(--primary) !important; padding: 0.5rem 1rem; border-radius: 4px; }
 
-    .cv-download {
-      border: 1px solid var(--primary);
-      color: var(--primary) !important;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-    }
-
-    /* --- HERO --- */
+    /* --- UPGRADED HERO SECTION --- */
     header {
-      padding: 150px 10% 100px;
-      max-width: 1200px;
-    }
-
-    .badge {
-      font-family: var(--font-mono);
-      color: var(--primary);
-      background: rgba(0, 255, 157, 0.1);
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
-      display: inline-block;
-    }
-
-    h1 { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; letter-spacing: -2px; margin-bottom: 1rem; }
-    
-    .glitch-text { color: var(--secondary); font-size: 1.25rem; max-width: 600px; }
-
-    /* --- SECTION STYLING --- */
-    section { padding: 80px 10%; }
-    
-    .section-head {
-      font-family: var(--font-mono);
-      font-size: 1.5rem;
-      margin-bottom: 3rem;
+      padding: 120px 10% 80px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+      flex-wrap: wrap;
     }
 
-    .section-head::after {
-      content: "";
-      height: 1px;
-      background: var(--border);
-      flex-grow: 1;
-      margin-left: 20px;
+    .hero-content { flex: 1; min-width: 300px; }
+    
+    .profile-container {
+      position: relative;
+      width: 350px;
+      height: 350px;
+      flex-shrink: 0;
     }
 
-    /* --- SKILLS TERMINAL --- */
-    .terminal-window {
-      background: #000;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    /* Glow effect behind your photo */
+    .profile-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%; height: 100%;
+      background: var(--primary);
+      filter: blur(80px);
+      opacity: 0.15;
+      border-radius: 50%;
+      z-index: -1;
     }
 
-    .terminal-header {
-      background: #1a1a1e;
-      padding: 10px 15px;
-      display: flex;
-      gap: 8px;
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 1px solid var(--primary);
+      box-shadow: 0 0 20px rgba(0, 255, 157, 0.1);
+      transition: 0.5s;
     }
 
-    .dot { width: 12px; height: 12px; border-radius: 50%; }
-    .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-
-    .terminal-body {
-      padding: 2rem;
-      font-family: var(--font-mono);
-      color: #d1d5db;
-      font-size: 0.9rem;
+    .profile-img:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
     }
 
-    .command { color: var(--primary); }
-    .typing { border-right: 2px solid var(--primary); animation: blink 0.8s infinite; }
+    .badge { font-family: var(--font-mono); color: var(--primary); background: rgba(0, 255, 157, 0.1); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1rem; display: inline-block; }
+    h1 { font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; letter-spacing: -2px; margin-bottom: 1rem; line-height: 1.1; }
+    h1 span { color: var(--primary); }
+    .glitch-text { color: var(--secondary); font-size: 1.1rem; max-width: 500px; }
 
-    /* --- GRID --- */
+    /* --- PROJECTS & CERTIFICATES --- */
+    section { padding: 80px 10%; }
+    .section-head { font-family: var(--font-mono); font-size: 1.5rem; margin-bottom: 3rem; display: flex; align-items: center; }
+    .section-head::after { content: ""; height: 1px; background: var(--border); flex-grow: 1; margin-left: 20px; }
+
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
     .project-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 2rem;
       border-radius: 12px;
+      overflow: hidden;
       transition: 0.3s;
-      position: relative;
     }
 
-    .project-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-5px);
-    }
+    .project-card:hover { border-color: var(--primary); transform: translateY(-5px); }
 
-    .project-card h3 { margin-bottom: 1rem; font-size: 1.25rem; }
-    .project-card p { color: var(--secondary); font-size: 0.9rem; margin-bottom: 1.5rem; }
-
-    .tag-list { display: flex; gap: 8px; flex-wrap: wrap; }
-    .tag { font-size: 0.7rem; font-family: var(--font-mono); color: var(--accent); }
-
-    .external-link {
-      margin-top: 1.5rem;
-      display: inline-block;
-      text-decoration: none;
-      color: white;
-      font-size: 0.85rem;
-      border-bottom: 1px solid var(--primary);
-    }
-
-    /* --- FOOTER & FORM --- */
-    .contact-form {
-      max-width: 600px;
-      margin-top: 2rem;
-    }
-
-    input, textarea {
+    /* Container for Project/Cert Images */
+    .card-banner {
       width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 1rem;
-      color: white;
-      margin-bottom: 1rem;
-      border-radius: 4px;
-      font-family: var(--font-sans);
+      height: 200px;
+      overflow: hidden;
+      background: #000;
+      border-bottom: 1px solid var(--border);
     }
 
-    button {
-      background: var(--primary);
-      color: black;
-      border: none;
-      padding: 1rem 2rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    .card-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s ease;
+      opacity: 0.8;
     }
 
-    footer {
-      text-align: center;
-      padding: 4rem;
-      color: var(--secondary);
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-    }
+    .project-card:hover .card-banner img { transform: scale(1.1); opacity: 1; }
 
-    @keyframes blink { 50% { opacity: 0; } }
+    .card-body { padding: 1.5rem; }
+    .project-card h3 { margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--primary); }
+    .project-card p { color: var(--secondary); font-size: 0.85rem; margin-bottom: 1rem; }
+
+    .tag-list { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+    .tag { font-size: 0.65rem; font-family: var(--font-mono); color: var(--accent); background: rgba(45, 212, 191, 0.1); padding: 2px 8px; border-radius: 4px; }
+
+    /* --- SKILLS TERMINAL --- */
+    .terminal-window { background: #000; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .terminal-header { background: #1a1a1e; padding: 10px 15px; display: flex; gap: 8px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+    .terminal-body { padding: 2rem; font-family: var(--font-mono); color: #d1d5db; font-size: 0.9rem; }
+    .command { color: var(--primary); }
+
+    /* --- CONTACT --- */
+    .contact-form { max-width: 600px; margin-top: 2rem; }
+    input, textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); padding: 1rem; color: white; margin-bottom: 1rem; border-radius: 4px; }
+    button { background: var(--primary); color: black; border: none; padding: 1rem 2rem; font-weight: 700; cursor: pointer; text-transform: uppercase; }
+
+    footer { text-align: center; padding: 4rem; color: var(--secondary); font-family: var(--font-mono); font-size: 0.8rem; }
 
     @media (max-width: 768px) {
-      header, section { padding: 80px 5%; }
+      header { padding: 100px 5% 50px; text-align: center; justify-content: center; }
+      .profile-container { width: 250px; height: 250px; order: -1; }
+      section { padding: 80px 5%; }
       .nav-links { display: none; }
     }
   </style>
@@ -227,7 +184,7 @@
 <body>
 
   <nav>
-    <div class="nav-logo">KATE_FERNANDEZ_v2.0</div>
+    <div class="nav-logo">KATE_FERNANDEZ_v2.1</div>
     <div class="nav-links">
       <a href="#about">// about</a>
       <a href="#skills">// skills</a>
@@ -238,28 +195,28 @@
   </nav>
 
   <header id="about">
-    <div class="badge">SYSTEMS_ENGINEER_IN_TRAINING</div>
-    <h1>Building robust <span>digital systems</span> from the ground up.</h1>
-    <p class="glitch-text">I am Kate Fernandez, a BSIT student specializing in technical troubleshooting and full-stack development. Based in the Philippines.</p>
+    <div class="hero-content">
+      <div class="badge">SYSTEMS_ENGINEER_IN_TRAINING</div>
+      <h1>Building robust <span>digital systems</span> from the ground up.</h1>
+      <p class="glitch-text">I am Kate Fernandez, a BSIT student specializing in technical troubleshooting and full-stack development. Currently based in the Philippines.</p>
+    </div>
+    
+    <div class="profile-container">
+      <div class="profile-glow"></div>
+      <img src="YOUR_PROFILE_PHOTO.jpg" alt="Kate Fernandez" class="profile-img">
+    </div>
   </header>
 
   <section id="skills">
     <div class="section-head">01. TECHNICAL_STACK</div>
     <div class="terminal-window">
-      <div class="terminal-header">
-        <div class="dot red"></div>
-        <div class="dot yellow"></div>
-        <div class="dot green"></div>
-      </div>
+      <div class="terminal-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
       <div class="terminal-body">
-        <p><span class="command">kate@portfolio:~$</span> fetch-skills --all</p>
-        <br>
+        <p><span class="command">kate@portfolio:~$</span> fetch-skills --all</p><br>
         <p>> LANGUAGES: [ HTML5, PHP, C++, SQL, CSS3 ]</p>
         <p>> TOOLS: [ Adobe Photoshop, Canva, Figma, Git ]</p>
         <p>> HARDWARE: [ TV Troubleshooting, System Diagnosis, Circuit Design ]</p>
         <p>> EDUCATION: [ BSIT @ Central Philippine State University ]</p>
-        <br>
-        <p><span class="command">kate@portfolio:~$</span> <span class="typing">_</span></p>
       </div>
     </div>
   </section>
@@ -269,63 +226,22 @@
     <div class="portfolio-grid">
       
       <div class="project-card">
-        <div class="badge">CERTIFIED</div>
-        <h3>Troubleshooting & Systems</h3>
-        <p>Expert diagnostic services for hardware failures and optimized system design layouts. Certified Competency in Troubleshooting.</p>
-        <div class="tag-list">
-          <span class="tag">#HARDWARE</span>
-          <span class="tag">#OJT_2026</span>
-          <span class="tag">#MAINTENANCE</span>
+        <div class="card-banner">
+          <img src="Screenshot_20251027-155104~2.png" alt="Troubleshooting Certificate">
+        </div>
+        <div class="card-body">
+          <div class="tag-list"><span class="tag">CERTIFIED</span><span class="tag">HARDWARE</span></div>
+          <h3>Troubleshooting Expert</h3>
+          <p>Certified diagnostic services for complex hardware failures and system maintenance.</p>
         </div>
       </div>
 
       <div class="project-card">
-        <div class="badge">DESIGN</div>
-        <h3>Creative Assets & UI</h3>
-        <p>Visual identity projects including jersey designs, marketing banners, and high-fidelity shop prototypes in Figma.</p>
-        <div class="tag-list">
-          <span class="tag">#PHOTOSHOP</span>
-          <span class="tag">#FIGMA</span>
-          <span class="tag">#UI_UX</span>
+        <div class="card-banner">
+          <img src="Screenshot_20251027-155107~2.png" alt="Creative Design">
         </div>
-        <a href="https://www.canva.com/design/DAGvdfGDG_Y/jItqxaZVqjGSwXW4QyI5NQ/edit" target="_blank" class="external-link">OPEN_CANVA_PROJECT</a>
-      </div>
-
-      <div class="project-card">
-        <div class="badge">DEVELOPMENT</div>
-        <h3>Database Management</h3>
-        <p>Integrated back-end solutions using PHP and MySQL for data-driven applications and student projects.</p>
-        <div class="tag-list">
-          <span class="tag">#PHP</span>
-          <span class="tag">#SQL</span>
-          <span class="tag">#BACKEND</span>
-        </div>
-        <a href="https://www.figma.com/proto/tCLPo1k0npdfRbJ8CrolNU/KATIE-S-SHOP" target="_blank" class="external-link">VIEW_FIGMA_PROTOTYPE</a>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="section-head">03. ESTABLISH_CONNECTION</div>
-    <div class="contact-form">
-      <p style="color: var(--secondary); margin-bottom: 2rem;">Ready to collaborate? Send a ping to my inbox.</p>
-      <form>
-        <input type="text" placeholder="ID / NAME" required>
-        <input type="email" placeholder="EMAIL_ADDRESS" required>
-        <textarea rows="4" placeholder="MESSAGE_BODY" required></textarea>
-        <button type="submit">TRANSMIT_DATA</button>
-      </form>
-      <div style="margin-top: 3rem; font-family: var(--font-mono); font-size: 0.9rem;">
-        <p>> CALL: 09071290207</p>
-        <p>> LOC: Negros Occidental, PH</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>SYSTEM STATUS: STABLE // &copy; 2026 KATE_FERNANDEZ</p>
-  </footer>
-
-</body>
-</html>
+        <div class="card-body">
+          <div class="tag-list"><span class="tag">PHOTOSHOP</span><span class="tag">UI_UX</span></div>
+          <h3>Creative Assets & UI</h3>
+          <p>Jersey designs, marketing banners, and high-fidelity UI prototypes in Figma.</p>
+          <a href="
