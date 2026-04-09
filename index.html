@@ -3,263 +3,329 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kate Fernandez | IT Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <title>Kate Fernandez | Systems & Design</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --primary-color: #00d2ff;
-      --secondary-color: #3a7bd5;
-      --bg-dark: #0f172a;
-      --card-bg: rgba(255, 255, 255, 0.05);
-      --text-main: #f8fafc;
-      --text-dim: #94a3b8;
+      --bg: #0a0a0c;
+      --surface: #16161a;
+      --primary: #00ff9d; /* Matrix/Cyber Green */
+      --secondary: #94a3b8;
+      --accent: #2dd4bf;
+      --border: rgba(255, 255, 255, 0.1);
+      --font-mono: 'Fira Code', monospace;
+      --font-sans: 'Inter', sans-serif;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-main);
+      background-color: var(--bg);
+      color: white;
+      font-family: var(--font-sans);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* --- BACKGROUND ANIMATION --- */
-    .bg-glow {
+    /* --- SCANLINE EFFECT --- */
+    body::before {
+      content: " ";
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
-      z-index: -1;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                  linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      z-index: 9999;
+      background-size: 100% 2px, 3px 100%;
+      pointer-events: none;
     }
 
     /* --- NAVIGATION --- */
     nav {
-      position: fixed;
-      top: 0; width: 100%;
-      padding: 1.5rem 10%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem 10%;
+      background: rgba(10, 10, 12, 0.8);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
     }
 
-    .logo { font-weight: 600; font-size: 1.5rem; color: var(--primary-color); }
-    .nav-links { display: flex; list-style: none; gap: 2rem; }
-    .nav-links a { text-decoration: none; color: var(--text-main); font-size: 0.9rem; transition: 0.3s; }
-    .nav-links a:hover { color: var(--primary-color); }
+    .nav-logo { font-family: var(--font-mono); font-weight: 700; color: var(--primary); }
 
-    .cv-btn {
-      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-      padding: 0.6rem 1.2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: transform 0.3s;
-    }
-    .cv-btn:hover { transform: scale(1.05); color: white; }
-
-    /* --- HERO SECTION --- */
-    section { padding: 100px 10%; min-height: 100vh; }
-    
-    .hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1rem; }
-    .hero h1 span { color: var(--primary-color); }
-    .hero p { font-size: 1.2rem; color: var(--text-dim); max-width: 600px; margin-bottom: 2rem; }
-
-    /* --- GRID LAYOUTS --- */
-    .section-title { font-size: 2.5rem; margin-bottom: 3rem; text-align: center; }
-    
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 2rem;
-      border-radius: 20px;
-      backdrop-filter: blur(5px);
-      transition: 0.4s;
-    }
-
-    .card:hover {
-      border-color: var(--primary-color);
-      transform: translateY(-10px);
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .card h3 { margin-bottom: 1rem; color: var(--primary-color); }
-    .card img { width: 100%; border-radius: 10px; margin-bottom: 1rem; opacity: 0.8; }
-
-    /* --- SKILLS PILLS --- */
-    .skills-container { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
-    .skill-tag {
-      background: rgba(0, 210, 255, 0.1);
-      color: var(--primary-color);
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      border: 1px solid rgba(0, 210, 255, 0.3);
-    }
-
-    /* --- CONTACT --- */
-    .contact-container {
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    form { display: grid; gap: 1rem; margin-top: 2rem; }
-    input, textarea {
-      width: 100%;
-      padding: 1rem;
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      color: white;
-      outline: none;
-    }
-    input:focus, textarea:focus { border-color: var(--primary-color); }
-
-    button[type="submit"] {
-      background: var(--primary-color);
-      color: var(--bg-dark);
-      padding: 1rem;
-      border: none;
-      border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
+    .nav-links a {
+      text-decoration: none;
+      color: var(--secondary);
+      margin-left: 2rem;
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
       transition: 0.3s;
     }
 
-    #topBtn {
-      position: fixed; bottom: 30px; right: 30px;
-      background: var(--primary-color);
-      width: 50px; height: 50px; border-radius: 50%;
-      border: none; cursor: pointer; display: none;
-      font-size: 1.5rem; z-index: 100;
+    .nav-links a:hover { color: var(--primary); }
+
+    .cv-download {
+      border: 1px solid var(--primary);
+      color: var(--primary) !important;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+
+    /* --- HERO --- */
+    header {
+      padding: 150px 10% 100px;
+      max-width: 1200px;
+    }
+
+    .badge {
+      font-family: var(--font-mono);
+      color: var(--primary);
+      background: rgba(0, 255, 157, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    h1 { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; letter-spacing: -2px; margin-bottom: 1rem; }
+    
+    .glitch-text { color: var(--secondary); font-size: 1.25rem; max-width: 600px; }
+
+    /* --- SECTION STYLING --- */
+    section { padding: 80px 10%; }
+    
+    .section-head {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .section-head::after {
+      content: "";
+      height: 1px;
+      background: var(--border);
+      flex-grow: 1;
+      margin-left: 20px;
+    }
+
+    /* --- SKILLS TERMINAL --- */
+    .terminal-window {
+      background: #000;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .terminal-header {
+      background: #1a1a1e;
+      padding: 10px 15px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+
+    .terminal-body {
+      padding: 2rem;
+      font-family: var(--font-mono);
+      color: #d1d5db;
+      font-size: 0.9rem;
+    }
+
+    .command { color: var(--primary); }
+    .typing { border-right: 2px solid var(--primary); animation: blink 0.8s infinite; }
+
+    /* --- GRID --- */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 12px;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    .project-card h3 { margin-bottom: 1rem; font-size: 1.25rem; }
+    .project-card p { color: var(--secondary); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    .tag-list { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag { font-size: 0.7rem; font-family: var(--font-mono); color: var(--accent); }
+
+    .external-link {
+      margin-top: 1.5rem;
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      font-size: 0.85rem;
+      border-bottom: 1px solid var(--primary);
+    }
+
+    /* --- FOOTER & FORM --- */
+    .contact-form {
+      max-width: 600px;
+      margin-top: 2rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1rem;
+      color: white;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+      font-family: var(--font-sans);
+    }
+
+    button {
+      background: var(--primary);
+      color: black;
+      border: none;
+      padding: 1rem 2rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     footer {
-      padding: 2rem;
       text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-dim);
+      padding: 4rem;
+      color: var(--secondary);
+      font-family: var(--font-mono);
       font-size: 0.8rem;
     }
 
+    @keyframes blink { 50% { opacity: 0; } }
+
     @media (max-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      nav { padding: 1rem 5%; }
-      .nav-links { display: none; } /* Mobile optimization needed */
+      header, section { padding: 80px 5%; }
+      .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <div class="bg-glow"></div>
-
   <nav>
-    <div class="logo">KF.DEV</div>
-    <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="Kate_Fernandez_CV.pdf" target="_blank" download class="cv-btn">Download CV</a>
+    <div class="nav-logo">KATE_FERNANDEZ_v2.0</div>
+    <div class="nav-links">
+      <a href="#about">// about</a>
+      <a href="#skills">// skills</a>
+      <a href="#projects">// work</a>
+      <a href="#contact">// contact</a>
+      <a href="Kate_Fernandez_CV.pdf" target="_blank" download class="cv-download">DOWNLOAD_CV</a>
+    </div>
   </nav>
 
-  <section id="home" class="hero">
-    <p style="color: var(--primary-color); font-family: 'JetBrains Mono';">Hello World, I am</p>
-    <h1>Kate <span>Fernandez</span></h1>
-    <p>A Bachelor of Science in Information Technology student passionate about solving complex problems through code and creative design.</p>
-    <div class="skills-container">
-      <span class="skill-tag">HTML/PHP</span>
-      <span class="skill-tag">Photoshop</span>
-      <span class="skill-tag">Troubleshooting</span>
-      <span class="skill-tag">System Design</span>
+  <header id="about">
+    <div class="badge">SYSTEMS_ENGINEER_IN_TRAINING</div>
+    <h1>Building robust <span>digital systems</span> from the ground up.</h1>
+    <p class="glitch-text">I am Kate Fernandez, a BSIT student specializing in technical troubleshooting and full-stack development. Based in the Philippines.</p>
+  </header>
+
+  <section id="skills">
+    <div class="section-head">01. TECHNICAL_STACK</div>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <div class="terminal-body">
+        <p><span class="command">kate@portfolio:~$</span> fetch-skills --all</p>
+        <br>
+        <p>> LANGUAGES: [ HTML5, PHP, C++, SQL, CSS3 ]</p>
+        <p>> TOOLS: [ Adobe Photoshop, Canva, Figma, Git ]</p>
+        <p>> HARDWARE: [ TV Troubleshooting, System Diagnosis, Circuit Design ]</p>
+        <p>> EDUCATION: [ BSIT @ Central Philippine State University ]</p>
+        <br>
+        <p><span class="command">kate@portfolio:~$</span> <span class="typing">_</span></p>
+      </div>
     </div>
   </section>
 
-  <section id="about">
-    <h2 class="section-title">Professional Background</h2>
-    <div class="card">
-      <p>Currently studying at <strong>Central Philippine State University</strong>, I bridge the gap between technical troubleshooting and user-centric design. My OJT experience helped me master the art of diagnosing technical issues while maintaining a high standard for aesthetic innovation.</p>
-    </div>
-  </section>
-
-  <section id="portfolio">
-    <h2 class="section-title">Projects & Certificates</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Troubleshooting Certificate</h3>
-        <p>Awarded for excellence in diagnosing hardware and software system failures.</p>
-        <div class="skill-tag" style="margin-top: 10px;">Hardware Certification</div>
+  <section id="projects">
+    <div class="section-head">02. RECENT_DEPLOYMENTS</div>
+    <div class="portfolio-grid">
+      
+      <div class="project-card">
+        <div class="badge">CERTIFIED</div>
+        <h3>Troubleshooting & Systems</h3>
+        <p>Expert diagnostic services for hardware failures and optimized system design layouts. Certified Competency in Troubleshooting.</p>
+        <div class="tag-list">
+          <span class="tag">#HARDWARE</span>
+          <span class="tag">#OJT_2026</span>
+          <span class="tag">#MAINTENANCE</span>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>Digital Design Portfolio</h3>
-        <p>A collection of jersey designs, banners, and UI components created using Adobe Photoshop.</p>
-        <a href="https://www.canva.com/design/DAGvdfGDG_Y/jItqxaZVqjGSwXW4QyI5NQ/edit" target="_blank" style="color: var(--primary-color); text-decoration: none; font-size: 0.9rem;">View Projects →</a>
+      <div class="project-card">
+        <div class="badge">DESIGN</div>
+        <h3>Creative Assets & UI</h3>
+        <p>Visual identity projects including jersey designs, marketing banners, and high-fidelity shop prototypes in Figma.</p>
+        <div class="tag-list">
+          <span class="tag">#PHOTOSHOP</span>
+          <span class="tag">#FIGMA</span>
+          <span class="tag">#UI_UX</span>
+        </div>
+        <a href="https://www.canva.com/design/DAGvdfGDG_Y/jItqxaZVqjGSwXW4QyI5NQ/edit" target="_blank" class="external-link">OPEN_CANVA_PROJECT</a>
       </div>
 
-      <div class="card">
-        <h3>System Development</h3>
-        <p>Proficient in C++ and PHP database management for building efficient back-end systems.</p>
-        <div class="skill-tag" style="margin-top: 10px;">Backend Dev</div>
+      <div class="project-card">
+        <div class="badge">DEVELOPMENT</div>
+        <h3>Database Management</h3>
+        <p>Integrated back-end solutions using PHP and MySQL for data-driven applications and student projects.</p>
+        <div class="tag-list">
+          <span class="tag">#PHP</span>
+          <span class="tag">#SQL</span>
+          <span class="tag">#BACKEND</span>
+        </div>
+        <a href="https://www.figma.com/proto/tCLPo1k0npdfRbJ8CrolNU/KATIE-S-SHOP" target="_blank" class="external-link">VIEW_FIGMA_PROTOTYPE</a>
       </div>
+
     </div>
   </section>
 
   <section id="contact">
-    <h2 class="section-title">Get In Touch</h2>
-    <div class="contact-container">
-      <p>Available for freelance projects and collaboration.</p>
+    <div class="section-head">03. ESTABLISH_CONNECTION</div>
+    <div class="contact-form">
+      <p style="color: var(--secondary); margin-bottom: 2rem;">Ready to collaborate? Send a ping to my inbox.</p>
       <form>
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email Address" required>
-        <textarea rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit">Execute Message</button>
+        <input type="text" placeholder="ID / NAME" required>
+        <input type="email" placeholder="EMAIL_ADDRESS" required>
+        <textarea rows="4" placeholder="MESSAGE_BODY" required></textarea>
+        <button type="submit">TRANSMIT_DATA</button>
       </form>
-      <p style="margin-top: 2rem; color: var(--text-dim);">Phone: 09071290207</p>
+      <div style="margin-top: 3rem; font-family: var(--font-mono); font-size: 0.9rem;">
+        <p>> CALL: 09071290207</p>
+        <p>> LOC: Negros Occidental, PH</p>
+      </div>
     </div>
   </section>
 
   <footer>
-    &copy; 2026 Designed by Kate Fernandez | Built with &lt;3 and HTML/CSS
+    <p>SYSTEM STATUS: STABLE // &copy; 2026 KATE_FERNANDEZ</p>
   </footer>
-
-  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" id="topBtn">↑</button>
-
-  <script>
-    const topBtn = document.getElementById("topBtn");
-    window.onscroll = () => {
-      if (document.documentElement.scrollTop > 500) {
-        topBtn.style.display = "block";
-      } else {
-        topBtn.style.display = "none";
-      }
-    };
-  </script>
 
 </body>
 </html>
