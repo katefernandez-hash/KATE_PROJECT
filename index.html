@@ -59,7 +59,6 @@
     .nav-links a:hover { color: var(--primary); }
     .cv-download { border: 1px solid var(--primary); color: var(--primary) !important; padding: 0.5rem 1rem; border-radius: 4px; }
 
-    /* --- UPGRADED HERO SECTION --- */
     header {
       padding: 120px 10% 80px;
       display: flex;
@@ -73,12 +72,11 @@
     
     .profile-container {
       position: relative;
-      width: 350px;
-      height: 350px;
+      width: 320px;
+      height: 320px;
       flex-shrink: 0;
     }
 
-    /* Glow effect behind your photo */
     .profile-glow {
       position: absolute;
       top: 50%; left: 50%;
@@ -87,7 +85,6 @@
       background: var(--primary);
       filter: blur(80px);
       opacity: 0.15;
-      border-radius: 50%;
       z-index: -1;
     }
 
@@ -98,24 +95,17 @@
       border-radius: 20px;
       border: 1px solid var(--primary);
       box-shadow: 0 0 20px rgba(0, 255, 157, 0.1);
-      transition: 0.5s;
-    }
-
-    .profile-img:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
     }
 
     .badge { font-family: var(--font-mono); color: var(--primary); background: rgba(0, 255, 157, 0.1); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1rem; display: inline-block; }
-    h1 { font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; letter-spacing: -2px; margin-bottom: 1rem; line-height: 1.1; }
+    h1 { font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; letter-spacing: -2px; margin-bottom: 1rem; }
     h1 span { color: var(--primary); }
-    .glitch-text { color: var(--secondary); font-size: 1.1rem; max-width: 500px; }
 
-    /* --- PROJECTS & CERTIFICATES --- */
     section { padding: 80px 10%; }
     .section-head { font-family: var(--font-mono); font-size: 1.5rem; margin-bottom: 3rem; display: flex; align-items: center; }
     .section-head::after { content: ""; height: 1px; background: var(--border); flex-grow: 1; margin-left: 20px; }
 
+    /* --- PORTFOLIO GRID --- */
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -132,116 +122,45 @@
 
     .project-card:hover { border-color: var(--primary); transform: translateY(-5px); }
 
-    /* Container for Project/Cert Images */
     .card-banner {
       width: 100%;
-      height: 200px;
+      height: 180px;
       overflow: hidden;
       background: #000;
       border-bottom: 1px solid var(--border);
+      cursor: pointer;
     }
 
     .card-banner img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: 0.5s ease;
-      opacity: 0.8;
+      opacity: 0.7;
+      transition: 0.5s;
     }
 
-    .project-card:hover .card-banner img { transform: scale(1.1); opacity: 1; }
+    .project-card:hover .card-banner img { opacity: 1; }
 
     .card-body { padding: 1.5rem; }
     .project-card h3 { margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--primary); }
-    .project-card p { color: var(--secondary); font-size: 0.85rem; margin-bottom: 1rem; }
-
-    .tag-list { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
-    .tag { font-size: 0.65rem; font-family: var(--font-mono); color: var(--accent); background: rgba(45, 212, 191, 0.1); padding: 2px 8px; border-radius: 4px; }
-
-    /* --- SKILLS TERMINAL --- */
-    .terminal-window { background: #000; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-    .terminal-header { background: #1a1a1e; padding: 10px 15px; display: flex; gap: 8px; }
-    .dot { width: 12px; height: 12px; border-radius: 50%; }
-    .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-    .terminal-body { padding: 2rem; font-family: var(--font-mono); color: #d1d5db; font-size: 0.9rem; }
-    .command { color: var(--primary); }
-
-    /* --- CONTACT --- */
-    .contact-form { max-width: 600px; margin-top: 2rem; }
-    input, textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); padding: 1rem; color: white; margin-bottom: 1rem; border-radius: 4px; }
-    button { background: var(--primary); color: black; border: none; padding: 1rem 2rem; font-weight: 700; cursor: pointer; text-transform: uppercase; }
-
-    footer { text-align: center; padding: 4rem; color: var(--secondary); font-family: var(--font-mono); font-size: 0.8rem; }
-
-    @media (max-width: 768px) {
-      header { padding: 100px 5% 50px; text-align: center; justify-content: center; }
-      .profile-container { width: 250px; height: 250px; order: -1; }
-      section { padding: 80px 5%; }
-      .nav-links { display: none; }
-    }
-  </style>
-</head>
-<body>
-
-  <nav>
-    <div class="nav-logo">KATE_FERNANDEZ_v2.1</div>
-    <div class="nav-links">
-      <a href="#about">// about</a>
-      <a href="#skills">// skills</a>
-      <a href="#projects">// work</a>
-      <a href="#contact">// contact</a>
-      <a href="Kate_Fernandez_CV.pdf" target="_blank" download class="cv-download">DOWNLOAD_CV</a>
-    </div>
-  </nav>
-
-  <header id="about">
-    <div class="hero-content">
-      <div class="badge">SYSTEMS_ENGINEER_IN_TRAINING</div>
-      <h1>Building robust <span>digital systems</span> from the ground up.</h1>
-      <p class="glitch-text">I am Kate Fernandez, a BSIT student specializing in technical troubleshooting and full-stack development. Currently based in the Philippines.</p>
-    </div>
     
-    <div class="profile-container">
-      <div class="profile-glow"></div>
-      <img src="YOUR_PROFILE_PHOTO.jpg" alt="Kate Fernandez" class="profile-img">
-    </div>
-  </header>
+    .proof-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
 
-  <section id="skills">
-    <div class="section-head">01. TECHNICAL_STACK</div>
-    <div class="terminal-window">
-      <div class="terminal-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-      <div class="terminal-body">
-        <p><span class="command">kate@portfolio:~$</span> fetch-skills --all</p><br>
-        <p>> LANGUAGES: [ HTML5, PHP, C++, SQL, CSS3 ]</p>
-        <p>> TOOLS: [ Adobe Photoshop, Canva, Figma, Git ]</p>
-        <p>> HARDWARE: [ TV Troubleshooting, System Diagnosis, Circuit Design ]</p>
-        <p>> EDUCATION: [ BSIT @ Central Philippine State University ]</p>
-      </div>
-    </div>
-  </section>
+    .proof-btn:hover {
+      background: var(--primary);
+      color: black;
+    }
 
-  <section id="projects">
-    <div class="section-head">02. RECENT_DEPLOYMENTS</div>
-    <div class="portfolio-grid">
-      
-      <div class="project-card">
-        <div class="card-banner">
-          <img src="Screenshot_20251027-155104~2.png" alt="Troubleshooting Certificate">
-        </div>
-        <div class="card-body">
-          <div class="tag-list"><span class="tag">CERTIFIED</span><span class="tag">HARDWARE</span></div>
-          <h3>Troubleshooting Expert</h3>
-          <p>Certified diagnostic services for complex hardware failures and system maintenance.</p>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="card-banner">
-          <img src="Screenshot_20251027-155107~2.png" alt="Creative Design">
-        </div>
-        <div class="card-body">
-          <div class="tag-list"><span class="tag">PHOTOSHOP</span><span class="tag">UI_UX</span></div>
-          <h3>Creative Assets & UI</h3>
-          <p>Jersey designs, marketing banners, and high-fidelity UI prototypes in Figma.</p>
-          <a href="
+    /* --- MODAL BOX (THE VIE
