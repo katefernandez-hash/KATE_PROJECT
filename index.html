@@ -3,335 +3,298 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kate Fernandez | Systems & Design</title>
+  <title>Kate Fernandez | IT Systems & Support</title>
   
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg: #0a0a0c;
-      --surface: #16161a;
-      --primary: #00ff9d;
-      --secondary: #94a3b8;
-      --accent: #2dd4bf;
-      --border: rgba(255, 255, 255, 0.1);
-      --font-mono: 'Fira Code', monospace;
-      --font-sans: 'Inter', sans-serif;
+      --primary-color: #00ff9d; /* Tech Green */
+      --bg-dark: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background-color: var(--bg);
-      color: white;
-      font-family: var(--font-sans);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
       line-height: 1.6;
-      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
-    /* --- SCANLINE EFFECT --- */
-    body::before {
-      content: " ";
-      position: fixed;
-      top: 0; left: 0; bottom: 0; right: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
-                  linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-      z-index: 9999;
-      background-size: 100% 2px, 3px 100%;
-      pointer-events: none;
+    /* --- HEADER & NAV --- */
+    header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      padding: 100px 10% 60px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* --- NAVIGATION --- */
+    .status-badge {
+      display: inline-block;
+      padding: 5px 12px;
+      background: rgba(0, 255, 157, 0.1);
+      color: var(--primary-color);
+      border-radius: 20px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--primary-color);
+    }
+
+    h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; }
+    h1 span { color: var(--primary-color); }
+
     nav {
+      position: sticky;
+      top: 0;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 1rem 10%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 10%;
-      background: rgba(10, 10, 12, 0.85);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
-    .nav-logo { font-family: var(--font-mono); font-weight: 700; color: var(--primary); font-size: 1.1rem; }
-    .nav-links a { text-decoration: none; color: var(--secondary); margin-left: 2rem; font-size: 0.85rem; font-family: var(--font-mono); transition: 0.3s; }
-    .nav-links a:hover { color: var(--primary); }
-    .cv-download { border: 1px solid var(--primary); color: var(--primary) !important; padding: 0.5rem 1rem; border-radius: 4px; }
-
-    /* --- HERO SECTION --- */
-    header {
-      padding: 120px 10% 80px;
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 60px;
-      flex-wrap: wrap;
-    }
-
-    .hero-text { flex: 1; min-width: 320px; }
-    
-    .profile-frame {
-      position: relative;
-      width: 380px;
-      height: 380px;
-      flex-shrink: 0;
-    }
-
-    .profile-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      filter: grayscale(20%);
-      transition: 0.5s;
-    }
-
-    .profile-frame::after {
-      content: "";
-      position: absolute;
-      top: 15px; left: 15px;
-      width: 100%; height: 100%;
-      border: 2px solid var(--primary);
-      border-radius: 12px;
-      z-index: -1;
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 2rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
       transition: 0.3s;
     }
 
-    .profile-frame:hover img { filter: grayscale(0%); transform: translate(-5px, -5px); border-color: var(--primary); }
-    .profile-frame:hover::after { transform: translate(5px, 5px); }
-
-    .badge { font-family: var(--font-mono); color: var(--primary); background: rgba(0, 255, 157, 0.1); padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; margin-bottom: 1.5rem; display: inline-block; border: 1px solid rgba(0, 255, 157, 0.2); }
-    h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 1.5rem; }
-    h1 span { color: var(--primary); }
-    .hero-description { color: var(--secondary); font-size: 1.15rem; max-width: 550px; margin-bottom: 2rem; }
+    .nav-links a:hover { color: var(--primary-color); }
+    
+    .cv-btn {
+      padding: 8px 20px;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color) !important;
+      border-radius: 5px;
+    }
 
     /* --- SECTION STYLING --- */
-    section { padding: 100px 10%; max-width: 1400px; margin: 0 auto; }
-    .section-head { font-family: var(--font-mono); font-size: 1.2rem; margin-bottom: 4rem; display: flex; align-items: center; color: var(--primary); }
-    .section-head::after { content: ""; height: 1px; background: var(--border); flex-grow: 1; margin-left: 20px; }
+    section { padding: 80px 10%; max-width: 1200px; margin: auto; }
+    h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid var(--primary-color); padding-left: 15px; }
 
-    /* --- PORTFOLIO GRID --- */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2.5rem;
-    }
-
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project-card:hover { border-color: var(--primary); transform: translateY(-10px); }
-
-    .card-image {
-      width: 100%;
-      height: 220px;
-      background: #000;
-      overflow: hidden;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .card-image img {
-      width: 100%;
-      height: 100%;
+    /* --- ABOUT SECTION --- */
+    .about-container { display: flex; gap: 40px; align-items: center; }
+    .about-text { flex: 2; }
+    .about-img {
+      flex: 1;
+      width: 250px;
+      height: 250px;
       object-fit: cover;
-      opacity: 0.7;
-      transition: 0.5s;
+      border-radius: 20px;
+      border: 2px solid var(--primary-color);
+      box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
     }
 
-    .project-card:hover .card-image img { opacity: 1; transform: scale(1.05); }
+    /* --- TECH SKILLS GRID --- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
 
-    .card-content { padding: 2rem; flex-grow: 1; }
-    .project-card h3 { margin-bottom: 0.75rem; font-size: 1.4rem; color: white; }
-    .project-card p { color: var(--secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
-
-    .tag-list { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .tag { font-size: 0.7rem; font-family: var(--font-mono); color: var(--accent); background: rgba(45, 212, 191, 0.05); padding: 2px 8px; border-radius: 4px; }
-
-    .btn-view {
-      display: inline-block;
-      text-decoration: none;
-      color: var(--primary);
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      padding: 8px 16px;
-      border: 1px solid var(--primary);
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 15px;
+      overflow: hidden;
       transition: 0.3s;
-      cursor: pointer;
-      background: transparent;
     }
-    .btn-view:hover { background: var(--primary); color: black; }
 
-    /* --- MODAL / LIGHTBOX --- */
-    .modal {
+    .skill-card:hover { transform: translateY(-10px); border-color: var(--primary-color); }
+
+    .skill-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+      filter: grayscale(30%);
+      transition: 0.3s;
+    }
+
+    .skill-card:hover img { filter: grayscale(0%); }
+
+    .skill-info { padding: 20px; }
+    .skill-info h3 { color: var(--primary-color); margin-bottom: 10px; }
+    .skill-info p { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* --- LIGHTBOX MODAL --- */
+    #lightbox {
       display: none;
       position: fixed;
       z-index: 10000;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.9);
       justify-content: center;
       align-items: center;
     }
-    .modal-content { max-width: 90%; max-height: 85%; border-radius: 8px; border: 1px solid var(--primary); }
-    .close-modal { position: absolute; top: 20px; right: 30px; color: white; font-size: 30px; cursor: pointer; }
+    #lightbox img { max-width: 80%; max-height: 80%; border: 2px solid var(--primary-color); }
+    #lightbox .close { position: absolute; top: 40px; right: 40px; color: white; font-size: 40px; cursor: pointer; }
 
-    /* --- TERMINAL SKILLS --- */
-    .terminal-window { background: #000; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
-    .terminal-header { background: #1a1a1e; padding: 12px 20px; display: flex; gap: 8px; border-bottom: 1px solid var(--border); }
-    .dot { width: 12px; height: 12px; border-radius: 50%; }
-    .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-    .terminal-body { padding: 2.5rem; font-family: var(--font-mono); color: #d1d5db; line-height: 1.8; }
-    .command { color: var(--primary); }
+    /* --- CONTACT & FEEDBACK --- */
+    .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+    input, textarea {
+      width: 100%; background: #0f172a; border: 1px solid #334155;
+      padding: 15px; color: white; border-radius: 8px; margin-bottom: 15px;
+    }
+    button[type="submit"] {
+      background: var(--primary-color); color: #000; font-weight: bold;
+      border: none; padding: 15px; border-radius: 8px; cursor: pointer; width: 100%;
+    }
 
-    /* --- FOOTER & CONTACT --- */
-    .contact-form { max-width: 600px; }
-    input, textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); padding: 1.2rem; color: white; margin-bottom: 1.5rem; border-radius: 4px; font-family: var(--font-sans); transition: 0.3s; }
-    input:focus, textarea:focus { border-color: var(--primary); outline: none; }
-    button { background: var(--primary); color: black; border: none; padding: 1rem 2.5rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
-    button:hover { letter-spacing: 4px; box-shadow: 0 0 20px rgba(0, 255, 157, 0.4); }
+    /* --- TOP BUTTON --- */
+    #topBtn {
+      display: none; position: fixed; bottom: 30px; right: 30px;
+      background: var(--primary-color); color: black; border: none;
+      padding: 15px; border-radius: 50%; cursor: pointer; z-index: 99;
+    }
 
-    footer { text-align: center; padding: 6rem 2rem; color: var(--secondary); font-family: var(--font-mono); font-size: 0.75rem; border-top: 1px solid var(--border); }
+    footer { text-align: center; padding: 40px; background: #070b14; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); }
 
-    @media (max-width: 1024px) {
-      header { padding: 80px 5%; justify-content: center; text-align: center; }
-      .profile-frame { width: 300px; height: 300px; order: -1; }
-      .hero-description { margin: 0 auto 2rem; }
-      .nav-links { display: none; }
+    @media (max-width: 768px) {
+      .about-container, .contact-wrapper { flex-direction: column; grid-template-columns: 1fr; }
+      h1 { font-size: 2.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <div id="imgModal" class="modal">
-    <span class="close-modal" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalTarget">
+  <div id="lightbox" onclick="this.style.display='none'">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" src="">
   </div>
 
   <nav>
-    <div class="nav-logo">KATE_FERNANDEZ_v2.5</div>
+    <div style="font-family: 'Fira Code'; font-weight: bold;">KATE.SYS</div>
     <div class="nav-links">
-      <a href="#about">// about</a>
-      <a href="#skills">// skills</a>
-      <a href="#projects">// work</a>
-      <a href="#contact">// contact</a>
-      <a href="Kate_Fernandez_CV.pdf" target="_blank" download class="cv-download">DOWNLOAD_CV</a>
+      <a href="#about">ABOUT</a>
+      <a href="#skills">STACK</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#contact">CONTACT</a>
+      <a href="Kate_Fernandez_CV.pdf" target="_blank" class="cv-btn">RESUME.PDF</a>
     </div>
   </nav>
 
-  <header id="about">
-    <div class="hero-text">
-      <div class="badge">SYSTEMS_ENGINEER_IN_TRAINING</div>
-      <h1>Building robust <span>digital systems</span> from the ground up.</h1>
-      <p class="hero-description">I am Kate Fernandez, a BSIT student specializing in technical troubleshooting, UI design, and full-stack development based in the Philippines.</p>
-      <button onclick="location.href='#projects'">VIEW_PORTFOLIO</button>
-    </div>
-    
-    <div class="profile-frame">
-      <img src="your-profile-photo.jpg" alt="Kate Fernandez" class="profile-img">
-    </div>
+  <header>
+    <div class="status-badge">SYSTEMS_ACTIVE_2026</div>
+    <h1>Kate <span>Fernandez</span></h1>
+    <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px;">
+      BSIT Specialist in Systems Diagnostics, UI/UX Design, and Database Architecture.
+    </p>
   </header>
 
-  <section id="skills">
-    <div class="section-head">01. TECHNICAL_STACK</div>
-    <div class="terminal-window">
-      <div class="terminal-header">
-        <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+  <section id="about">
+    <div class="about-container">
+      <img src="1745418184075.jpg" alt="Kate Fernandez" class="about-img">
+      <div class="about-text">
+        <h2>Professional Profile</h2>
+        <p>I am a dedicated IT Professional focused on bridging the gap between hardware reliability and digital innovation. Currently pursuing a BSIT at CPSU, I specialize in technical troubleshooting and full-stack development.</p>
+        <br>
+        <p><strong>Technical Focus:</strong> Systems Diagnostics, Circuit Layouts, and Data-Driven Web Applications.</p>
       </div>
-      <div class="terminal-body">
-        <p><span class="command">kate@portfolio:~$</span> fetch-skills --verbose</p>
-        <p>> LANGUAGES: [ HTML5, PHP, C++, SQL, CSS3 ]</p>
-        <p>> DESIGN: [ Adobe Photoshop, Canva, Figma ]</p>
-        <p>> HARDWARE: [ TV Troubleshooting, System Diagnosis, Circuits ]</p>
-        <p>> STATUS: Available for collaboration_</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Technical Competencies</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <img src="Screenshot_20251027-155104~2.png" onclick="showImg(this.src)" alt="Hardware Proof">
+        <div class="skill-info">
+          <h3>Systems & Diagnostics</h3>
+          <p>Certified in hardware troubleshooting and diagnostic switch systems maintenance.</p>
+        </div>
+      </div>
+      <div class="skill-card">
+        <img src="Screenshot_20251027-155107~2.png" onclick="showImg(this.src)" alt="Design Proof">
+        <div class="skill-info">
+          <h3>UI/UX Architecture</h3>
+          <p>Advanced asset creation using Adobe Photoshop for enterprise branding and UI components.</p>
+        </div>
+      </div>
+      <div class="skill-card">
+        <img src="Screenshot_20251027-155111~2.png" onclick="showImg(this.src)" alt="Dev Proof">
+        <div class="skill-info">
+          <h3>Full-Stack Dev</h3>
+          <p>Proficient in HTML5, PHP, and SQL database management for scalable systems.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="projects">
-    <div class="section-head">02. VERIFIED_EXPERIENCE</div>
-    <div class="portfolio-grid">
-      
-      <div class="project-card">
-        <div class="card-image" onclick="openModal('Screenshot_20251027-155104~2.png')">
-          <img src="Screenshot_20251027-155104~2.png" alt="Hardware Troubleshooting">
-        </div>
-        <div class="card-content">
-          <div class="tag-list"><span class="tag">#HARDWARE</span><span class="tag">#MAINTENANCE</span></div>
-          <h3>Troubleshooting & Systems</h3>
-          <p>Professional diagnostic services for hardware failures and optimized system design layouts. Certified Competency.</p>
-          <button class="btn-view" onclick="openModal('Screenshot_20251027-155104~2.png')">VIEW_PROOF</button>
-        </div>
+    <h2>Verified Projects</h2>
+    <div class="skills-grid">
+      <div class="skill-card" style="padding: 20px;">
+        <h3>01. Portfolio Ecosystem</h3>
+        <p>Modern Canva-based interactive design for systems overview.</p>
+        <a href="https://www.canva.com/design/DAGvdfGDG_Y/jItqxaZVqjGSwXW4QyI5NQ/edit" style="color: var(--accent); text-decoration: none;">[ DEPLOYED_LINK ]</a>
       </div>
-
-      <div class="project-card">
-        <div class="card-image" onclick="openModal('Screenshot_20251027-155107~2.png')">
-          <img src="Screenshot_20251027-155107~2.png" alt="UI Design">
-        </div>
-        <div class="card-content">
-          <div class="tag-list"><span class="tag">#FIGMA</span><span class="tag">#UI_UX</span><span class="tag">#BRANDING</span></div>
-          <h3>Creative Assets & UI</h3>
-          <p>High-fidelity shop prototypes and visual identity projects created with technical precision and aesthetic balance.</p>
-          <button class="btn-view" onclick="openModal('Screenshot_20251027-155107~2.png')">VIEW_PROOF</button>
-        </div>
+      <div class="skill-card" style="padding: 20px;">
+        <h3>02. OS Architecture</h3>
+        <p>Educational analysis and layout of Operating Systems principles.</p>
+        <a href="https://www.canva.com/design/DAGvrY3oodg/BIqkGG5XqxYp8Q7vZ5_d_g/edit" style="color: var(--accent); text-decoration: none;">[ DEPLOYED_LINK ]</a>
       </div>
-
-      <div class="project-card">
-        <div class="card-image" onclick="openModal('Screenshot_20251027-155111~2.png')">
-          <img src="Screenshot_20251027-155111~2.png" alt="Backend Dev">
-        </div>
-        <div class="card-content">
-          <div class="tag-list"><span class="tag">#PHP</span><span class="tag">#SQL</span><span class="tag">#DATABASE</span></div>
-          <h3>Database Management</h3>
-          <p>Integrated back-end solutions using PHP and MySQL for data-driven applications and student-led enterprise projects.</p>
-          <button class="btn-view" onclick="openModal('Screenshot_20251027-155111~2.png')">VIEW_PROOF</button>
-        </div>
+      <div class="skill-card" style="padding: 20px;">
+        <h3>03. Shop Interface</h3>
+        <p>High-fidelity Figma prototype for retail system management.</p>
+        <a href="https://www.figma.com/proto/tCLPo1k0npdfRbJ8CrolNU/KATIE-S-SHOP" style="color: var(--accent); text-decoration: none;">[ VIEW_PROTOTYPE ]</a>
       </div>
-
     </div>
   </section>
 
   <section id="contact">
-    <div class="section-head">03. ESTABLISH_CONNECTION</div>
-    <div class="contact-form">
+    <div class="contact-wrapper">
+      <div>
+        <h2>Get in Touch</h2>
+        <p style="color: var(--text-muted);">Available for technical consulting and junior IT roles.</p>
+        <br>
+        <p><strong>Email:</strong> (Attached in Resume)</p>
+        <p><strong>Mobile:</strong> 09071290207</p>
+        <p><strong>LOC:</strong> Negros Occidental, PH</p>
+      </div>
       <form>
-        <input type="text" placeholder="FULL_NAME" required>
-        <input type="email" placeholder="EMAIL_ADDRESS" required>
-        <textarea rows="5" placeholder="MESSAGE_BODY" required></textarea>
-        <button type="submit">TRANSMIT_DATA</button>
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <textarea rows="5" placeholder="Project details or Inquiry..." required></textarea>
+        <button type="submit">TRANSMIT FEEDBACK</button>
       </form>
     </div>
   </section>
 
   <footer>
-    <p>SYSTEM_STATUS: ACTIVE // &copy; 2026 KATE_FERNANDEZ // BUILT_WITH_PRECISION</p>
+    <p>&copy; 2026 Kate Fernandez | Systems Architecture v2.0</p>
   </footer>
 
+  <button onclick="scrollToTop()" id="topBtn">UP</button>
+
   <script>
-    function openModal(src) {
-      document.getElementById('modalTarget').src = src;
-      document.getElementById('imgModal').style.display = 'flex';
+    function showImg(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
     }
-    function closeModal() {
-      document.getElementById('imgModal').style.display = 'none';
-    }
-    // Close modal on outside click
-    window.onclick = function(event) {
-      let modal = document.getElementById('imgModal');
-      if (event.target == modal) { closeModal(); }
+
+    let topButton = document.getElementById("topBtn");
+    window.onscroll = function() {
+      if (document.documentElement.scrollTop > 300) topButton.style.display = "block";
+      else topButton.style.display = "none";
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   </script>
-
 </body>
 </html>
