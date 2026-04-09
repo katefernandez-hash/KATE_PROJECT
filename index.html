@@ -109,7 +109,6 @@
       width: 100%; height: 220px; object-fit: cover;
       cursor: pointer; transition: 0.5s;
     }
-    .skill-card:hover img { filter: brightness(1.1); }
 
     .skill-info { padding: 25px; }
     .skill-info h3 { color: var(--primary-color); margin-bottom: 12px; font-size: 1.25rem; }
@@ -131,7 +130,6 @@
       width: 100%; background: #0f172a; border: 1px solid #334155;
       padding: 15px; color: white; border-radius: 8px; margin-bottom: 15px; font-family: inherit;
     }
-    input:focus, textarea:focus { outline: none; border-color: var(--primary-color); }
     button[type="submit"] {
       background: var(--primary-color); color: #000; font-weight: bold;
       border: none; padding: 15px; border-radius: 8px; cursor: pointer; width: 100%; transition: 0.3s;
@@ -149,7 +147,7 @@
     @media (max-width: 768px) {
       h1 { font-size: 2.5rem; }
       nav { padding: 1rem 5%; }
-      .nav-links { display: none; } /* Hide links on mobile for cleaner look */
+      .nav-links { display: none; }
     }
   </style>
 </head>
@@ -165,7 +163,7 @@
     <div class="nav-links">
       <a href="#about">ABOUT</a>
       <a href="#skills">SKILLS</a>
-      <a href="#projects">CREDENTIALS</a>
+      <a href="#projects">PROJECTS</a>
       <a href="#contact">CONTACT</a>
       <a href="Kate_Fernandez_CV.pdf" target="_blank" class="cv-btn">RESUME.PDF</a>
     </div>
@@ -221,7 +219,7 @@
   </section>
 
   <section id="projects">
-    <h2>Verified Credentials & Projects</h2>
+    <h2>Verified Credentials & Deployments</h2>
     
     <div class="skills-grid" style="margin-bottom: 40px;">
       <div class="skill-card" style="border-top: 3px solid var(--primary-color);">
@@ -249,10 +247,17 @@
         <p style="margin: 10px 0; font-size: 0.9rem; color: var(--text-muted);">Modern Canva-based interactive systems overview.</p>
         <a href="https://www.canva.com/design/DAGvdfGDG_Y/jItqxaZVqjGSwXW4QyI5NQ/edit" target="_blank" style="color: var(--accent); text-decoration: none; font-family: 'Fira Code'; font-size: 0.8rem;">[ DEPLOYED_LINK ]</a>
       </div>
+
       <div class="skill-card" style="padding: 25px; border-left: 3px solid var(--accent);">
         <h3>02. Shop Infrastructure</h3>
         <p style="margin: 10px 0; font-size: 0.9rem; color: var(--text-muted);">High-fidelity Figma prototype for retail management.</p>
         <a href="https://www.figma.com/proto/tCLPo1k0npdfRbJ8CrolNU/KATIE-S-SHOP" target="_blank" style="color: var(--accent); text-decoration: none; font-family: 'Fira Code'; font-size: 0.8rem;">[ VIEW_PROTOTYPE ]</a>
+      </div>
+
+      <div class="skill-card" style="padding: 25px; border-left: 3px solid var(--accent);">
+        <h3>03. OS Architecture</h3>
+        <p style="margin: 10px 0; font-size: 0.9rem; color: var(--text-muted);">Educational analysis and layout of Operating Systems principles.</p>
+        <a href="https://www.canva.com/design/DAGvrY3oodg/BIqkGG5XqxYp8Q7vZ5_d_g/edit" target="_blank" style="color: var(--accent); text-decoration: none; font-family: 'Fira Code'; font-size: 0.8rem;">[ DEPLOYED_LINK ]</a>
       </div>
     </div>
   </section>
