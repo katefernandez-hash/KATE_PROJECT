@@ -34,19 +34,20 @@
       content: " ";
       position: fixed;
       top: 0; left: 0; bottom: 0; right: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                  linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
+                  linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
       z-index: 9999;
       background-size: 100% 2px, 3px 100%;
       pointer-events: none;
     }
 
+    /* --- NAVIGATION --- */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1.5rem 10%;
-      background: rgba(10, 10, 12, 0.8);
+      background: rgba(10, 10, 12, 0.85);
       backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
@@ -54,84 +55,94 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .nav-logo { font-family: var(--font-mono); font-weight: 700; color: var(--primary); }
+    .nav-logo { font-family: var(--font-mono); font-weight: 700; color: var(--primary); font-size: 1.1rem; }
     .nav-links a { text-decoration: none; color: var(--secondary); margin-left: 2rem; font-size: 0.85rem; font-family: var(--font-mono); transition: 0.3s; }
     .nav-links a:hover { color: var(--primary); }
     .cv-download { border: 1px solid var(--primary); color: var(--primary) !important; padding: 0.5rem 1rem; border-radius: 4px; }
 
+    /* --- HERO SECTION --- */
     header {
       padding: 120px 10% 80px;
+      max-width: 1400px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 50px;
+      gap: 60px;
       flex-wrap: wrap;
     }
 
-    .hero-content { flex: 1; min-width: 300px; }
+    .hero-text { flex: 1; min-width: 320px; }
     
-    .profile-container {
+    .profile-frame {
       position: relative;
-      width: 320px;
-      height: 320px;
+      width: 380px;
+      height: 380px;
       flex-shrink: 0;
-    }
-
-    .profile-glow {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%; height: 100%;
-      background: var(--primary);
-      filter: blur(80px);
-      opacity: 0.15;
-      z-index: -1;
     }
 
     .profile-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 20px;
-      border: 1px solid var(--primary);
-      box-shadow: 0 0 20px rgba(0, 255, 157, 0.1);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      filter: grayscale(20%);
+      transition: 0.5s;
     }
 
-    .badge { font-family: var(--font-mono); color: var(--primary); background: rgba(0, 255, 157, 0.1); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1rem; display: inline-block; }
-    h1 { font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; letter-spacing: -2px; margin-bottom: 1rem; }
-    h1 span { color: var(--primary); }
+    .profile-frame::after {
+      content: "";
+      position: absolute;
+      top: 15px; left: 15px;
+      width: 100%; height: 100%;
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      z-index: -1;
+      transition: 0.3s;
+    }
 
-    section { padding: 80px 10%; }
-    .section-head { font-family: var(--font-mono); font-size: 1.5rem; margin-bottom: 3rem; display: flex; align-items: center; }
+    .profile-frame:hover img { filter: grayscale(0%); transform: translate(-5px, -5px); border-color: var(--primary); }
+    .profile-frame:hover::after { transform: translate(5px, 5px); }
+
+    .badge { font-family: var(--font-mono); color: var(--primary); background: rgba(0, 255, 157, 0.1); padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; margin-bottom: 1.5rem; display: inline-block; border: 1px solid rgba(0, 255, 157, 0.2); }
+    h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 1.5rem; }
+    h1 span { color: var(--primary); }
+    .hero-description { color: var(--secondary); font-size: 1.15rem; max-width: 550px; margin-bottom: 2rem; }
+
+    /* --- SECTION STYLING --- */
+    section { padding: 100px 10%; max-width: 1400px; margin: 0 auto; }
+    .section-head { font-family: var(--font-mono); font-size: 1.2rem; margin-bottom: 4rem; display: flex; align-items: center; color: var(--primary); }
     .section-head::after { content: ""; height: 1px; background: var(--border); flex-grow: 1; margin-left: 20px; }
 
     /* --- PORTFOLIO GRID --- */
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
     }
 
     .project-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       overflow: hidden;
-      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
     }
 
-    .project-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+    .project-card:hover { border-color: var(--primary); transform: translateY(-10px); }
 
-    .card-banner {
+    .card-image {
       width: 100%;
-      height: 180px;
-      overflow: hidden;
+      height: 220px;
       background: #000;
-      border-bottom: 1px solid var(--border);
+      overflow: hidden;
       cursor: pointer;
+      position: relative;
     }
 
-    .card-banner img {
+    .card-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -139,28 +150,188 @@
       transition: 0.5s;
     }
 
-    .project-card:hover .card-banner img { opacity: 1; }
+    .project-card:hover .card-image img { opacity: 1; transform: scale(1.05); }
 
-    .card-body { padding: 1.5rem; }
-    .project-card h3 { margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--primary); }
-    
-    .proof-btn {
+    .card-content { padding: 2rem; flex-grow: 1; }
+    .project-card h3 { margin-bottom: 0.75rem; font-size: 1.4rem; color: white; }
+    .project-card p { color: var(--secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+    .tag-list { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tag { font-size: 0.7rem; font-family: var(--font-mono); color: var(--accent); background: rgba(45, 212, 191, 0.05); padding: 2px 8px; border-radius: 4px; }
+
+    .btn-view {
       display: inline-block;
-      margin-top: 1rem;
-      padding: 8px 16px;
-      background: transparent;
-      border: 1px solid var(--primary);
+      text-decoration: none;
       color: var(--primary);
       font-family: var(--font-mono);
-      font-size: 0.75rem;
-      cursor: pointer;
-      text-transform: uppercase;
+      font-size: 0.8rem;
+      padding: 8px 16px;
+      border: 1px solid var(--primary);
       transition: 0.3s;
+      cursor: pointer;
+      background: transparent;
     }
+    .btn-view:hover { background: var(--primary); color: black; }
 
-    .proof-btn:hover {
-      background: var(--primary);
-      color: black;
+    /* --- MODAL / LIGHTBOX --- */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
     }
+    .modal-content { max-width: 90%; max-height: 85%; border-radius: 8px; border: 1px solid var(--primary); }
+    .close-modal { position: absolute; top: 20px; right: 30px; color: white; font-size: 30px; cursor: pointer; }
 
-    /* --- MODAL BOX (THE VIE
+    /* --- TERMINAL SKILLS --- */
+    .terminal-window { background: #000; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+    .terminal-header { background: #1a1a1e; padding: 12px 20px; display: flex; gap: 8px; border-bottom: 1px solid var(--border); }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+    .terminal-body { padding: 2.5rem; font-family: var(--font-mono); color: #d1d5db; line-height: 1.8; }
+    .command { color: var(--primary); }
+
+    /* --- FOOTER & CONTACT --- */
+    .contact-form { max-width: 600px; }
+    input, textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); padding: 1.2rem; color: white; margin-bottom: 1.5rem; border-radius: 4px; font-family: var(--font-sans); transition: 0.3s; }
+    input:focus, textarea:focus { border-color: var(--primary); outline: none; }
+    button { background: var(--primary); color: black; border: none; padding: 1rem 2.5rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
+    button:hover { letter-spacing: 4px; box-shadow: 0 0 20px rgba(0, 255, 157, 0.4); }
+
+    footer { text-align: center; padding: 6rem 2rem; color: var(--secondary); font-family: var(--font-mono); font-size: 0.75rem; border-top: 1px solid var(--border); }
+
+    @media (max-width: 1024px) {
+      header { padding: 80px 5%; justify-content: center; text-align: center; }
+      .profile-frame { width: 300px; height: 300px; order: -1; }
+      .hero-description { margin: 0 auto 2rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="imgModal" class="modal">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalTarget">
+  </div>
+
+  <nav>
+    <div class="nav-logo">KATE_FERNANDEZ_v2.5</div>
+    <div class="nav-links">
+      <a href="#about">// about</a>
+      <a href="#skills">// skills</a>
+      <a href="#projects">// work</a>
+      <a href="#contact">// contact</a>
+      <a href="Kate_Fernandez_CV.pdf" target="_blank" download class="cv-download">DOWNLOAD_CV</a>
+    </div>
+  </nav>
+
+  <header id="about">
+    <div class="hero-text">
+      <div class="badge">SYSTEMS_ENGINEER_IN_TRAINING</div>
+      <h1>Building robust <span>digital systems</span> from the ground up.</h1>
+      <p class="hero-description">I am Kate Fernandez, a BSIT student specializing in technical troubleshooting, UI design, and full-stack development based in the Philippines.</p>
+      <button onclick="location.href='#projects'">VIEW_PORTFOLIO</button>
+    </div>
+    
+    <div class="profile-frame">
+      <img src="your-profile-photo.jpg" alt="Kate Fernandez" class="profile-img">
+    </div>
+  </header>
+
+  <section id="skills">
+    <div class="section-head">01. TECHNICAL_STACK</div>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+      </div>
+      <div class="terminal-body">
+        <p><span class="command">kate@portfolio:~$</span> fetch-skills --verbose</p>
+        <p>> LANGUAGES: [ HTML5, PHP, C++, SQL, CSS3 ]</p>
+        <p>> DESIGN: [ Adobe Photoshop, Canva, Figma ]</p>
+        <p>> HARDWARE: [ TV Troubleshooting, System Diagnosis, Circuits ]</p>
+        <p>> STATUS: Available for collaboration_</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">02. VERIFIED_EXPERIENCE</div>
+    <div class="portfolio-grid">
+      
+      <div class="project-card">
+        <div class="card-image" onclick="openModal('Screenshot_20251027-155104~2.png')">
+          <img src="Screenshot_20251027-155104~2.png" alt="Hardware Troubleshooting">
+        </div>
+        <div class="card-content">
+          <div class="tag-list"><span class="tag">#HARDWARE</span><span class="tag">#MAINTENANCE</span></div>
+          <h3>Troubleshooting & Systems</h3>
+          <p>Professional diagnostic services for hardware failures and optimized system design layouts. Certified Competency.</p>
+          <button class="btn-view" onclick="openModal('Screenshot_20251027-155104~2.png')">VIEW_PROOF</button>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-image" onclick="openModal('Screenshot_20251027-155107~2.png')">
+          <img src="Screenshot_20251027-155107~2.png" alt="UI Design">
+        </div>
+        <div class="card-content">
+          <div class="tag-list"><span class="tag">#FIGMA</span><span class="tag">#UI_UX</span><span class="tag">#BRANDING</span></div>
+          <h3>Creative Assets & UI</h3>
+          <p>High-fidelity shop prototypes and visual identity projects created with technical precision and aesthetic balance.</p>
+          <button class="btn-view" onclick="openModal('Screenshot_20251027-155107~2.png')">VIEW_PROOF</button>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-image" onclick="openModal('Screenshot_20251027-155111~2.png')">
+          <img src="Screenshot_20251027-155111~2.png" alt="Backend Dev">
+        </div>
+        <div class="card-content">
+          <div class="tag-list"><span class="tag">#PHP</span><span class="tag">#SQL</span><span class="tag">#DATABASE</span></div>
+          <h3>Database Management</h3>
+          <p>Integrated back-end solutions using PHP and MySQL for data-driven applications and student-led enterprise projects.</p>
+          <button class="btn-view" onclick="openModal('Screenshot_20251027-155111~2.png')">VIEW_PROOF</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-head">03. ESTABLISH_CONNECTION</div>
+    <div class="contact-form">
+      <form>
+        <input type="text" placeholder="FULL_NAME" required>
+        <input type="email" placeholder="EMAIL_ADDRESS" required>
+        <textarea rows="5" placeholder="MESSAGE_BODY" required></textarea>
+        <button type="submit">TRANSMIT_DATA</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>SYSTEM_STATUS: ACTIVE // &copy; 2026 KATE_FERNANDEZ // BUILT_WITH_PRECISION</p>
+  </footer>
+
+  <script>
+    function openModal(src) {
+      document.getElementById('modalTarget').src = src;
+      document.getElementById('imgModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('imgModal').style.display = 'none';
+    }
+    // Close modal on outside click
+    window.onclick = function(event) {
+      let modal = document.getElementById('imgModal');
+      if (event.target == modal) { closeModal(); }
+    }
+  </script>
+
+</body>
+</html>
