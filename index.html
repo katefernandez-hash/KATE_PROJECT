@@ -124,7 +124,7 @@
     #lightbox img { max-width: 90%; max-height: 80%; border: 2px solid var(--primary-color); border-radius: 8px; }
     #lightbox .close { position: absolute; top: 30px; right: 40px; color: white; font-size: 40px; cursor: pointer; }
 
-    /* --- CONTACT & FORMS --- */
+    /* --- CONTACT --- */
     .contact-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
     input, textarea {
       width: 100%; background: #0f172a; border: 1px solid #334155;
@@ -136,74 +136,69 @@
     }
     button[type="submit"]:hover { background: #00d684; transform: scale(1.02); }
 
-    /* --- UI ELEMENTS --- */
     #topBtn {
       display: none; position: fixed; bottom: 30px; right: 30px;
       background: var(--primary-color); color: black; border: none;
       padding: 15px; border-radius: 50%; cursor: pointer; z-index: 99; box-shadow: 0 0 15px var(--primary-color);
     }
 
-    /* --- CHATBOT UI --- */
-    #chat-launcher {
+    footer { text-align: center; padding: 60px 10%; background: #070b14; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); }
+
+    /* --- CHATBOT STYLES --- */
+    .chat-bubble {
       position: fixed; bottom: 30px; right: 100px;
-      background: var(--primary-color); color: black;
-      width: 60px; height: 60px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; z-index: 1001; box-shadow: 0 0 20px rgba(0, 255, 157, 0.4);
-      font-size: 24px; transition: 0.3s;
+      background: var(--primary-color); width: 60px; height: 60px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 2000; box-shadow: 0 5px 20px rgba(0,255,157,0.4);
+      transition: 0.3s;
     }
-    
-    #chat-window {
-      display: none; position: fixed; bottom: 100px; right: 30px;
+    .chat-bubble:hover { transform: scale(1.1); }
+
+    .chat-container {
+      position: fixed; bottom: 100px; right: 30px;
       width: 350px; height: 500px; background: var(--card-bg);
       border: 1px solid var(--primary-color); border-radius: 15px;
-      flex-direction: column; z-index: 1001; overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: none; flex-direction: column; z-index: 2000; overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     }
 
     .chat-header {
-      background: var(--primary-color); color: black; padding: 15px;
-      font-weight: bold; display: flex; justify-content: space-between;
-      font-family: 'Fira Code', monospace; font-size: 0.9rem;
+      background: var(--primary-color); color: #000; padding: 15px;
+      font-weight: bold; font-family: 'Fira Code', monospace; display: flex; justify-content: space-between;
     }
 
-    #chat-messages {
+    .chat-messages {
       flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
-      background: rgba(15, 23, 42, 0.5);
     }
 
-    .msg { padding: 10px 14px; border-radius: 12px; max-width: 85%; font-size: 0.85rem; line-height: 1.4; }
-    .msg.bot { background: #334155; color: white; align-self: flex-start; border-bottom-left-radius: 2px; }
-    .msg.user { background: var(--primary-color); color: black; align-self: flex-end; border-bottom-right-radius: 2px; font-weight: 500; }
+    .msg { padding: 8px 12px; border-radius: 10px; font-size: 0.9rem; max-width: 80%; }
+    .bot-msg { background: #0f172a; color: var(--text-main); align-self: flex-start; border-left: 3px solid var(--primary-color); }
+    .user-msg { background: var(--primary-color); color: #000; align-self: flex-end; }
 
-    .chat-options {
-      padding: 12px; border-top: 1px solid rgba(255,255,255,0.1);
-      display: flex; flex-wrap: wrap; gap: 6px; background: #1e293b;
-      max-height: 180px; overflow-y: auto;
+    .chat-input-area { padding: 15px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 5px; }
+    .chat-input-area input { margin-bottom: 0; font-size: 0.85rem; padding: 10px; }
+    .chat-input-area button { width: 50px; background: var(--primary-color); border: none; border-radius: 5px; cursor: pointer; }
+
+    .quick-replies { padding: 0 15px 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+    .quick-btn {
+      background: rgba(0,255,157,0.1); border: 1px solid var(--primary-color);
+      color: var(--primary-color); padding: 4px 8px; border-radius: 15px;
+      font-size: 0.7rem; cursor: pointer; font-family: 'Fira Code', monospace;
     }
-
-    .opt-btn {
-      background: transparent; border: 1px solid var(--primary-color);
-      color: var(--primary-color); padding: 6px 12px; border-radius: 15px;
-      font-size: 0.75rem; cursor: pointer; transition: 0.2s; font-family: 'Fira Code', monospace;
-    }
-    .opt-btn:hover { background: var(--primary-color); color: black; }
-
-    footer { text-align: center; padding: 60px 10%; background: #070b14; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); }
 
     @media (max-width: 768px) {
       h1 { font-size: 2.5rem; }
       nav { padding: 1rem 5%; }
       .nav-links { display: none; }
-      #chat-window { width: 90%; right: 5%; bottom: 90px; height: 70vh; }
-      #chat-launcher { right: 20px; }
+      .chat-container { width: 90%; right: 5%; bottom: 80px; }
+      .chat-bubble { right: 20px; }
     }
   </style>
 </head>
 <body>
 
   <div id="lightbox" onclick="this.style.display='none'">
-    <span class="close" onclick="this.parentElement.style.display='none'">&times;</span>
+    <span class="close">&times;</span>
     <img id="lightbox-img" src="">
   </div>
 
@@ -214,7 +209,7 @@
       <a href="#skills">SKILLS</a>
       <a href="#projects">PROJECTS</a>
       <a href="#contact">CONTACT</a>
-      <a href="#contact" class="cv-btn">RESUME.PDF</a>
+      <a href="Kate_Fernandez_CV.pdf" target="_blank" class="cv-btn">RESUME.PDF</a>
     </div>
   </nav>
 
@@ -272,20 +267,20 @@
     
     <div class="skills-grid" style="margin-bottom: 40px;">
       <div class="skill-card" style="border-top: 3px solid var(--primary-color);">
-        <img src="b39aaa3c-91eb-49d2-a4dd-cb2980acd13a.jpg" onclick="showImg(this.src)" alt="Certificate 1">
+        <img src="b39aaa3c-91eb-49d2-a4dd-cb2980acd13a.jpg" onclick="showImg(this.src)" alt="Certificate of Troubleshooting">
         <div class="skill-info">
           <div class="status-badge" style="font-size: 0.6rem;">CERTIFICATE</div>
           <h3>01. Seminar Certificate</h3>
-          <p>Integrative Foundation for Innovative Systematic Solutions.</p>
+          <p>Receiving a seminar certificate on Integrative Foundation for Innovative Systematic Solutions.</p>
         </div>
       </div>
 
       <div class="skill-card" style="border-top: 3px solid var(--primary-color);">
-        <img src="cac248b7-25d8-439e-b3bc-06cf85443036.jpg" onclick="showImg(this.src)" alt="Certificate 2">
+        <img src="cac248b7-25d8-439e-b3bc-06cf85443036.jpg" onclick="showImg(this.src)" alt="Certificate of Completion">
         <div class="skill-info">
           <div class="status-badge" style="font-size: 0.6rem;">CERTIFICATE</div>
           <h3>02. Seminar Certificate</h3>
-          <p>Professional Development and technical seminar completion.</p>
+          <p>Another certificate I recieve after second seminar .</p>
         </div>
       </div>
     </div>
@@ -305,7 +300,7 @@
 
       <div class="skill-card" style="padding: 25px; border-left: 3px solid var(--accent);">
         <h3>03. OS Architecture</h3>
-        <p style="margin: 10px 0; font-size: 0.9rem; color: var(--text-muted);">Educational analysis of Operating Systems principles.</p>
+        <p style="margin: 10px 0; font-size: 0.9rem; color: var(--text-muted);">Educational analysis and layout of Operating Systems principles.</p>
         <a href="https://www.canva.com/design/DAGvrY3oodg/BIqkGG5XqxYp8Q7vZ5_d_g/edit" target="_blank" style="color: var(--accent); text-decoration: none; font-family: 'Fira Code'; font-size: 0.8rem;">[ DEPLOYED_LINK ]</a>
       </div>
     </div>
@@ -319,7 +314,7 @@
         <p><strong>PH:</strong> 09071290207</p>
         <p><strong>LOC:</strong> Negros Occidental, PH</p>
       </div>
-      <form onsubmit="event.preventDefault(); alert('Message sent to Kate!');">
+      <form>
         <input type="text" placeholder="Full Name" required>
         <input type="email" placeholder="Email Address" required>
         <textarea rows="4" placeholder="Message or Inquiry..." required></textarea>
@@ -328,24 +323,24 @@
     </div>
   </section>
 
-  <div id="chat-launcher" onclick="toggleChat()">💬</div>
-  <div id="chat-window">
+  <div class="chat-bubble" onclick="toggleChat()">💬</div>
+  <div class="chat-container" id="chatWindow">
     <div class="chat-header">
-      <span>KATE_SYSTEMS_AI v2.0</span>
-      <span style="cursor:pointer" onclick="toggleChat()">×</span>
+      <span>KATE_BOT_v1.0</span>
+      <span style="cursor:pointer" onclick="toggleChat()">_</span>
     </div>
-    <div id="chat-messages">
-      <div class="msg bot">System Initialized. Accessing Kate's database... How can I assist you today?</div>
+    <div class="chat-messages" id="chatMsgs">
+      <div class="msg bot-msg">System Online. Hello! I'm Kate's Assistant. How can I help you?</div>
     </div>
-    <div class="chat-options">
-      <p style="width:100%; font-size: 0.6rem; color: var(--primary-color); padding-left: 5px;">// SELECT_QUERY</p>
-      <button class="opt-btn" onclick="askBot('Who is Kate?', 'Kate Fernandez is a 3rd Year BSIT student at Central Philippine State University. She specializes in systems diagnostics and visual design.')">About Kate</button>
-      <button class="opt-btn" onclick="askBot('Technical Skills?', 'She is proficient in HTML5, PHP, C++, SQL, and Adobe Photoshop. She is also an expert in hardware troubleshooting.')">Skills</button>
-      <button class="opt-btn" onclick="askBot('IT Support?', 'Kate can diagnose hardware failures, setup network switches, and troubleshoot TV systems.')">IT Support</button>
-      <button class="opt-btn" onclick="askBot('Location?', 'She is based in Negros Occidental, Philippines.')">Location</button>
-      <button class="opt-btn" onclick="askBot('Hire her?', 'Kate is currently looking for Junior IT roles or internships. Call 09071290207 to connect!')">Hire/Contact</button>
-      <button class="opt-btn" onclick="askBot('Projects?', 'She has developed a Portfolio Ecosystem (Canva), Katie-s-Shop (Figma), and OS Architecture guides.')">Projects</button>
-      <button class="opt-btn" onclick="askBot('Education?', 'Currently pursuing BS in Information Technology at CPSU - Moises Padilla Campus.')">Education</button>
+    <div class="quick-replies">
+      <button class="quick-btn" onclick="handleQuickReply('Tell me about Kate')">About Kate</button>
+      <button class="quick-btn" onclick="handleQuickReply('What are your skills?')">Skills</button>
+      <button class="quick-btn" onclick="handleQuickReply('Show me your projects')">Projects</button>
+      <button class="quick-btn" onclick="handleQuickReply('How to hire you?')">Contact</button>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="userInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMessage()">
+      <button onclick="sendMessage()">➤</button>
     </div>
   </div>
 
@@ -356,13 +351,13 @@
   <button onclick="scrollToTop()" id="topBtn">▲</button>
 
   <script>
-    /* --- LIGHTBOX & GALLERY --- */
+    // LIGHTBOX LOGIC
     function showImg(src) {
       document.getElementById('lightbox-img').src = src;
       document.getElementById('lightbox').style.display = 'flex';
     }
 
-    /* --- UI CONTROLS --- */
+    // SCROLL LOGIC
     let topButton = document.getElementById("topBtn");
     window.onscroll = function() {
       if (document.documentElement.scrollTop > 300) topButton.style.display = "block";
@@ -373,33 +368,59 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    /* --- CHATBOT ENGINE --- */
+    // CHATBOT LOGIC
+    const chatWindow = document.getElementById('chatWindow');
+    const chatMsgs = document.getElementById('chatMsgs');
+    const userInput = document.getElementById('userInput');
+
+    const botKnowledge = {
+      "about": "Kate Fernandez is a dedicated BSIT student at CPSU - Moises Padilla Campus. She specializes in systems diagnostics and creative digital solutions.",
+      "skills": "Kate is proficient in HTML5, PHP, C++, SQL, and Adobe Photoshop. She also has expertise in hardware troubleshooting and networking.",
+      "projects": "Kate has several live projects including a Portfolio Ecosystem, a Shop Infrastructure prototype on Figma, and OS Architecture analysis.",
+      "contact": "You can contact Kate via phone at 09071290207 or use the 'Get in Touch' section on this page.",
+      "hire": "Kate is open for junior IT roles and collaborations. You can message her directly or download her CV using the RESUME button.",
+      "hello": "Hi there! I am ready to answer questions about Kate's portfolio. Try asking about her skills or projects!",
+      "default": "I'm not sure about that. Try asking about Kate's 'skills', 'projects', or 'how to hire her'!"
+    };
+
     function toggleChat() {
-      const win = document.getElementById('chat-window');
-      win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+      chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
     }
 
-    function askBot(userMsg, botAns) {
-      const chatBox = document.getElementById('chat-messages');
-      
-      // User Message
-      const uDiv = document.createElement('div');
-      uDiv.className = 'msg user';
-      uDiv.innerText = userMsg;
-      chatBox.appendChild(uDiv);
-      chatBox.scrollTop = chatBox.scrollHeight;
+    function handleQuickReply(text) {
+      addMessage(text, 'user-msg');
+      generateResponse(text);
+    }
 
-      // Bot Processing
-      const typingDiv = document.createElement('div');
-      typingDiv.className = 'msg bot';
-      typingDiv.innerHTML = '<span style="font-style: italic; opacity: 0.6;">Retrieving...</span>';
-      chatBox.appendChild(typingDiv);
+    function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+      addMessage(text, 'user-msg');
+      userInput.value = '';
+      generateResponse(text);
+    }
 
-      // Bot Answer
+    function addMessage(text, className) {
+      const div = document.createElement('div');
+      div.className = `msg ${className}`;
+      div.innerText = text;
+      chatMsgs.appendChild(div);
+      chatMsgs.scrollTop = chatMsgs.scrollHeight;
+    }
+
+    function generateResponse(input) {
+      const lowerInput = input.toLowerCase();
+      let response = botKnowledge.default;
+
+      if (lowerInput.includes("about") || lowerInput.includes("who")) response = botKnowledge.about;
+      else if (lowerInput.includes("skill") || lowerInput.includes("tech")) response = botKnowledge.skills;
+      else if (lowerInput.includes("project")) response = botKnowledge.projects;
+      else if (lowerInput.includes("contact") || lowerInput.includes("hire") || lowerInput.includes("phone")) response = botKnowledge.contact;
+      else if (lowerInput.includes("hi") || lowerInput.includes("hello")) response = botKnowledge.hello;
+
       setTimeout(() => {
-        typingDiv.innerText = botAns;
-        chatBox.scrollTop = chatBox.scrollHeight;
-      }, 600);
+        addMessage(response, 'bot-msg');
+      }, 500);
     }
   </script>
 </body>
