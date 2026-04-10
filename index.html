@@ -104,12 +104,7 @@
     }
 
     .skill-card:hover { transform: translateY(-10px); border-color: var(--primary-color); }
-
-    .skill-card img {
-      width: 100%; height: 220px; object-fit: cover;
-      cursor: pointer; transition: 0.5s;
-    }
-
+    .skill-card img { width: 100%; height: 220px; object-fit: cover; cursor: pointer; transition: 0.5s; }
     .skill-info { padding: 25px; }
     .skill-info h3 { color: var(--primary-color); margin-bottom: 12px; font-size: 1.25rem; }
     .skill-info p { font-size: 0.95rem; color: var(--text-muted); }
@@ -122,7 +117,6 @@
       cursor: zoom-out;
     }
     #lightbox img { max-width: 90%; max-height: 80%; border: 2px solid var(--primary-color); border-radius: 8px; }
-    #lightbox .close { position: absolute; top: 30px; right: 40px; color: white; font-size: 40px; cursor: pointer; }
 
     /* --- CONTACT --- */
     .contact-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
@@ -134,27 +128,44 @@
       background: var(--primary-color); color: #000; font-weight: bold;
       border: none; padding: 15px; border-radius: 8px; cursor: pointer; width: 100%; transition: 0.3s;
     }
-    button[type="submit"]:hover { background: #00d684; transform: scale(1.02); }
+
+    /* --- CHATBOT STYLES --- */
+    #chat-widget {
+      position: fixed; bottom: 30px; right: 30px; z-index: 9999;
+      font-family: 'Inter', sans-serif;
+    }
+    #chat-button {
+      background: var(--primary-color); color: #000; border: none;
+      width: 60px; height: 60px; border-radius: 50%; cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 255, 157, 0.4); font-size: 24px;
+    }
+    #chat-window {
+      display: none; position: absolute; bottom: 80px; right: 0;
+      width: 320px; height: 450px; background: var(--card-bg);
+      border: 1px solid var(--primary-color); border-radius: 15px;
+      flex-direction: column; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .chat-header { background: var(--primary-color); color: #000; padding: 15px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
+    .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; }
+    .msg { padding: 10px 14px; border-radius: 12px; max-width: 85%; line-height: 1.4; }
+    .bot-msg { background: #334155; color: white; align-self: flex-start; border-bottom-left-radius: 2px; }
+    .user-msg { background: var(--primary-color); color: #000; align-self: flex-end; border-bottom-right-radius: 2px; }
+    .chat-footer { padding: 10px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 5px; }
+    .chat-footer input { margin-bottom: 0; padding: 8px; font-size: 0.85rem; }
+    .chat-footer button { background: var(--primary-color); border: none; padding: 0 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
     #topBtn {
-      display: none; position: fixed; bottom: 30px; right: 30px;
+      display: none; position: fixed; bottom: 100px; right: 30px; /* Moved up to not overlap chat */
       background: var(--primary-color); color: black; border: none;
-      padding: 15px; border-radius: 50%; cursor: pointer; z-index: 99; box-shadow: 0 0 15px var(--primary-color);
+      padding: 15px; border-radius: 50%; cursor: pointer; z-index: 99;
     }
 
     footer { text-align: center; padding: 60px 10%; background: #070b14; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); }
-
-    @media (max-width: 768px) {
-      h1 { font-size: 2.5rem; }
-      nav { padding: 1rem 5%; }
-      .nav-links { display: none; }
-    }
   </style>
 </head>
 <body>
 
   <div id="lightbox" onclick="this.style.display='none'">
-    <span class="close">&times;</span>
     <img id="lightbox-img" src="">
   </div>
 
@@ -165,7 +176,7 @@
       <a href="#skills">SKILLS</a>
       <a href="#projects">PROJECTS</a>
       <a href="#contact">CONTACT</a>
-      <a href="Kate_Fernandez_CV.pdf" target="_blank" class="cv-btn">RESUME.PDF</a>
+      <a href="#" class="cv-btn">RESUME.PDF</a>
     </div>
   </nav>
 
@@ -173,91 +184,35 @@
     <div class="status-badge">SYSTEMS_ACTIVE_2026</div>
     <h1>Kate <span>Fernandez</span></h1>
     <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 700px; font-family: 'Fira Code', monospace;">
-      IT STUDENT, CENTRAL PHILIPPINE STATE UNIVERSITY - MOISES PADILLA CAMPUS
+      IT STUDENT | SYSTEM DIAGNOSTICS | FULL-STACK DEVELOPER
     </p>
   </header>
 
+  <div id="chat-widget">
+    <div id="chat-window">
+      <div class="chat-header">
+        <span>KATE_BOT v1.0</span>
+        <button onclick="toggleChat()" style="background:none; border:none; cursor:pointer; font-weight:bold;">×</button>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="msg bot-msg">Hello! I'm Kate's virtual assistant. Ask me about her skills, location, or projects!</div>
+      </div>
+      <div class="chat-footer">
+        <input type="text" id="chat-input" placeholder="Type a message...">
+        <button onclick="handleChat()">></button>
+      </div>
+    </div>
+    <button id="chat-button" onclick="toggleChat()">💬</button>
+  </div>
   <section id="about">
     <div class="about-container">
-      <img src="1745418184075.jpg" alt="Kate Fernandez" class="about-img">
       <div class="about-text">
         <h2>Professional Profile</h2>
-        <p>I am a dedicated BSIT student specializing in systems diagnostics, creative design with Adobe Photoshop, and full-stack development. I bridge the gap between technical troubleshooting and user-centric digital solutions.</p>
+        <p>I am a dedicated BSIT student specializing in systems diagnostics, creative design, and full-stack development. I bridge the gap between technical troubleshooting and user-centric digital solutions.</p>
         <br>
         <p style="color: var(--primary-color); font-family: 'Fira Code'; font-size: 0.9rem;">
-          > MISSION: Optimize digital workflows through robust hardware maintenance and clean code.
+          > MISSION: Optimize digital workflows through hardware maintenance and clean code.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <h2>Technical Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <img src="Screenshot_20251027-155104~2.png" onclick="showImg(this.src)" alt="Technical Proof">
-        <div class="skill-info">
-          <h3>Diagnostics & Support</h3>
-          <p>Certified troubleshooting for hardware failures, television systems, and network switch layouts.</p>
-        </div>
-      </div>
-      <div class="skill-card">
-        <img src="Screenshot_20251027-155107~2.png" onclick="showImg(this.src)" alt="Design Proof">
-        <div class="skill-info">
-          <h3>Visual Design</h3>
-          <p>Proficient in Adobe Photoshop for branding, UI prototypes, and professional asset creation.</p>
-        </div>
-      </div>
-      <div class="skill-card">
-        <img src="Screenshot_20251027-155111~2.png" onclick="showImg(this.src)" alt="Coding Proof">
-        <div class="skill-info">
-          <h3>Software Engineering</h3>
-          <p>Proficient in HTML5, PHP, C++, and SQL database architecture for data-driven systems.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <h2>Verified Credentials & Deployments</h2>
-    
-    <div class="skills-grid" style="margin-bottom: 40px;">
-      <div class="skill-card" style="border-top: 3px solid var(--primary-color);">
-        <img src="b39aaa3c-91eb-49d2-a4dd-cb2980acd13a.jpg" onclick="showImg(this.src)" alt="Certificate of Troubleshooting">
-        <div class="skill-info">
-          <div class="status-badge" style="font-size: 0.6rem;">CERTIFICATE</div>
-          <h3>01. Seminar Certificate</h3>
-          <p>Receiving a seminar certificate on Integrative Foundation for Innovative Systematic Solutions.</p>
-        </div>
-      </div>
-
-      <div class="skill-card" style="border-top: 3px solid var(--primary-color);">
-        <img src="cac248b7-25d8-439e-b3bc-06cf85443036.jpg" onclick="showImg(this.src)" alt="Certificate of Completion">
-        <div class="skill-info">
-          <div class="status-badge" style="font-size: 0.6rem;">CERTIFICATE</div>
-          <h3>02. Seminar Certificate</h3>
-          <p>Another certificate I recieve after second seminar .</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="skills-grid">
-      <div class="skill-card" style="padding: 25px; border-left: 3px solid var(--accent);">
-        <h3>01. Portfolio Ecosystem</h3>
-        <p style="margin: 10px 0; font-size: 0.9rem; color: var(--text-muted);">Modern Canva-based interactive systems overview.</p>
-        <a href="https://www.canva.com/design/DAGvdfGDG_Y/jItqxaZVqjGSwXW4QyI5NQ/edit" target="_blank" style="color: var(--accent); text-decoration: none; font-family: 'Fira Code'; font-size: 0.8rem;">[ DEPLOYED_LINK ]</a>
-      </div>
-
-      <div class="skill-card" style="padding: 25px; border-left: 3px solid var(--accent);">
-        <h3>02. Shop Infrastructure</h3>
-        <p style="margin: 10px 0; font-size: 0.9rem; color: var(--text-muted);">High-fidelity Figma prototype for retail management.</p>
-        <a href="https://www.figma.com/proto/tCLPo1k0npdfRbJ8CrolNU/KATIE-S-SHOP" target="_blank" style="color: var(--accent); text-decoration: none; font-family: 'Fira Code'; font-size: 0.8rem;">[ VIEW_PROTOTYPE ]</a>
-      </div>
-
-      <div class="skill-card" style="padding: 25px; border-left: 3px solid var(--accent);">
-        <h3>03. OS Architecture</h3>
-        <p style="margin: 10px 0; font-size: 0.9rem; color: var(--text-muted);">Educational analysis and layout of Operating Systems principles.</p>
-        <a href="https://www.canva.com/design/DAGvrY3oodg/BIqkGG5XqxYp8Q7vZ5_d_g/edit" target="_blank" style="color: var(--accent); text-decoration: none; font-family: 'Fira Code'; font-size: 0.8rem;">[ DEPLOYED_LINK ]</a>
       </div>
     </div>
   </section>
@@ -266,14 +221,13 @@
     <div class="contact-wrapper">
       <div>
         <h2>Get in Touch</h2>
-        <p style="color: var(--text-muted); margin-bottom: 20px;">Open for junior IT roles and technical collaborations.</p>
         <p><strong>PH:</strong> 09071290207</p>
         <p><strong>LOC:</strong> Negros Occidental, PH</p>
       </div>
       <form>
         <input type="text" placeholder="Full Name" required>
         <input type="email" placeholder="Email Address" required>
-        <textarea rows="4" placeholder="Message or Inquiry..." required></textarea>
+        <textarea rows="4" placeholder="Message..." required></textarea>
         <button type="submit">TRANSMIT DATA</button>
       </form>
     </div>
@@ -286,6 +240,52 @@
   <button onclick="scrollToTop()" id="topBtn">▲</button>
 
   <script>
+    /* CHATBOT LOGIC */
+    const chatInput = document.getElementById('chat-input');
+    const chatBody = document.getElementById('chat-body');
+
+    function toggleChat() {
+      const win = document.getElementById('chat-window');
+      win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function addMessage(text, type) {
+      const div = document.createElement('div');
+      div.className = `msg ${type}-msg`;
+      div.innerText = text;
+      chatBody.appendChild(div);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function handleChat() {
+      const input = chatInput.value.trim().toLowerCase();
+      if (!input) return;
+
+      addMessage(chatInput.value, 'user');
+      chatInput.value = '';
+
+      setTimeout(() => {
+        if (input.includes('who') || input.includes('yourself') || input.includes('about')) {
+          addMessage("Kate is a BSIT student at CPSU-Moises Padilla, specializing in system diagnostics and software engineering.", 'bot');
+        } else if (input.includes('skill') || input.includes('can you do')) {
+          addMessage("She is proficient in Hardware Diagnostics, Photoshop, HTML5, PHP, C++, and SQL.", 'bot');
+        } else if (input.includes('contact') || input.includes('number') || input.includes('phone')) {
+          addMessage("You can reach her at 09071290207 or via the contact form on this page.", 'bot');
+        } else if (input.includes('location') || input.includes('where')) {
+          addMessage("She is based in Negros Occidental, Philippines.", 'bot');
+        } else if (input.includes('project')) {
+          addMessage("Kate has worked on Portfolio Ecosystems, Shop Management Prototypes, and OS Architecture layouts.", 'bot');
+        } else if (input.includes('hello') || input.includes('hi')) {
+          addMessage("Systems online. How can I assist you with Kate's portfolio?", 'bot');
+        } else {
+          addMessage("I'm not sure about that. Try asking about Kate's skills, projects, or contact info!", 'bot');
+        }
+      }, 600);
+    }
+
+    chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleChat(); });
+
+    /* ORIGINAL SCRIPTS */
     function showImg(src) {
       document.getElementById('lightbox-img').src = src;
       document.getElementById('lightbox').style.display = 'flex';
