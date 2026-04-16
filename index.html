@@ -402,7 +402,7 @@
 
     function addMessage(text, className) {
       const div = document.createElement('div');
-      div.className = msg ${className};
+      div.className = `msg ${className}`;
       div.innerText = text;
       chatMsgs.appendChild(div);
       chatMsgs.scrollTop = chatMsgs.scrollHeight;
